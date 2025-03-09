@@ -75,10 +75,10 @@ const Home = () => {
   };
 
   return (
-    <div>
+    <div className="p-40 left-10 p-l-10">
       <div>
         {messages.map((message, index) => (
-          <div key={index} className={message.isBot ? 'bot-message' : 'user-message'}>
+          <div key={index} className={message.isBot ? 'bot-message text-right' : 'user-message text-left'}>
             {message.text}
           </div>
         ))}

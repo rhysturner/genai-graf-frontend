@@ -43,7 +43,7 @@ export default function RootLayout({
   return (
     <html lang="en" >
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased ${graffitiCity.className} ${bgstyle}`}
+        className={`antialiased ${urbanCalligraphy.className} font-size: 20vw ${bgstyle}`}
       >
         {children}
       </body>
