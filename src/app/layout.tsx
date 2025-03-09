@@ -2,6 +2,24 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
+import bg from './moleskine.png'
+
+
+import localFont from 'next/font/local'
+
+const bgstyle = {
+  backgroundImage: `url(${bg.src})`,
+  width: '100%',
+  height: '100%',
+}
+
+const graffitiCity = localFont({
+  src: './Graffiti City.woff',
+})
+const urbanCalligraphy = localFont({
+  src: './Urban Calligraphy.woff2',
+})
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -23,9 +41,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" >
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased ${graffitiCity.className} ${bgstyle}`}
       >
         {children}
       </body>
