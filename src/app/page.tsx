@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react';
-import axios from 'axios';
 
 const Home = () => {
   const [prompt, setPrompt] = useState('');
@@ -47,34 +46,35 @@ const Home = () => {
         }),
       });
 
-
-      // const response = await fetch('http://localhost:8080/v1/chat/completions', {
-      //   model: 'LLaMA_CPP',
-      //   messages: payload,
-      //   temperature: 1.5,
-      //   stream: true,
-      // // });
-
       const reader = response.body
       ?.pipeThrough(new TextDecoderStream())
       .getReader();
       console.log('====================================');
       console.log(response);
       console.log('====================================');
+
+      let currentMessage: string = '';
      
       while (true) {
         const { done, value } = await reader.read();
         if (done) {
+          console.log('====================================');
+          console.log('Stream complete currentMessage', currentMessage);
+          const botReply = {
+            text: formatResponse(currentMessage),
+            isBot: true,
+          };
+          setMessages((prevMessages) => [...prevMessages, botReply]);
           break;
         }
         
-        console.log(value.);
-
-        const botReply = {
-          text: formatResponse(value.data?.choices[0].message.content),
-          isBot: true,
-        };
-        setMessages((prevMessages) => [...prevMessages, botReply]); 
+        // Check if value contains 'data: ' and parse the JSON response
+        if (value && value.startsWith('data: ')) {
+          const jsonResponse = JSON.parse(value.replace(/^data: /, ''));
+          const content = jsonResponse.choices[0].delta.content;
+          console.log('content', content);
+          currentMessage += content;
+        }
       }
 
     } catch (error) {
