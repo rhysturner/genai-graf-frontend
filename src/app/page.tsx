@@ -6,6 +6,7 @@ const Home = () => {
   const [prompt, setPrompt] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [messages, setMessages] = useState<{ text: string; isBot?: boolean }[]>([]);
+  const [currentMessages, seCurrentMessages] = useState('');
 
   const formatResponse = (response: string): string => response.replace(prompt, '');
 
@@ -60,6 +61,7 @@ const Home = () => {
         if (done) {
           console.log('====================================');
           console.log('Stream complete currentMessage', currentMessage);
+          
           const botReply = {
             text: formatResponse(currentMessage),
             isBot: true,
@@ -74,6 +76,7 @@ const Home = () => {
           const content = jsonResponse.choices[0].delta.content;
           console.log('content', content);
           currentMessage += content;
+          seCurrentMessages((prev) => prev + content);
         }
       }
 
@@ -107,8 +110,9 @@ const Home = () => {
   };
 
   return (
-    <div className="p-40 left-10 p-l-10">
+    <div className="pl-76 pr-50 pt-32 w-280">
       <div>
+        {currentMessages}
         {messages.map((message, index) => (
           <div key={index} className={message.isBot ? 'bot-message text-right' : 'user-message text-left'}>
             {message.text}
