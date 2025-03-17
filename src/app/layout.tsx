@@ -43,7 +43,8 @@ export default function RootLayout({
   return (
     <html lang="en" >
       <body
-        className={`antialiased ${urbanCalligraphy.className} font-size: 20vw ${bgstyle}`}
+        // className={`antialiased ${urbanCalligraphy.className} font-size: 20vw ${bgstyle}`}
+        className={`antialiased ${graffitiCity.className} font-size: 20vw ${bgstyle}`}
       >
         {children}
       </body>
