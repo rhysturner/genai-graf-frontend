@@ -1,8 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff
-  --foreground: #171717;
+  --background: #ffffff --foreground: #171717;
 }
 
 @theme inline {
@@ -20,20 +19,20 @@
 }
 
 body {
-  background: var(--background);  
-  background-image:    url(./moleskine.png);
-  background-size:     cover;  
-  background-repeat:   no-repeat;
-  background-position: top center;              
+  background: var(--background);
+  background-image: url(./moleskine.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top left;
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
   font-size: 30px;
   text-align: center;
 }
 
-.bot-message{
+.bot-message {
   /* background-color: red; */
 }
-.user-message{
+.user-message {
   /* background-color: aqua; */
 }
