@@ -2,25 +2,25 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import localFont from "next/font/local";
-import { Geist, Geist_Mono } from "next/font/google";
+// import localFont from "next/font/local";
+// import { Geist, Geist_Mono } from "next/font/google";
 
-const graffitiCity = localFont({
-  src: "./Graffiti City.woff",
-});
-const urbanCalligraphy = localFont({
-  src: "./Urban Calligraphy.woff2",
-});
+// const graffitiCity = localFont({
+//   src: "./Graffiti City.woff",
+// });
+// const urbanCalligraphy = localFont({
+//   src: "./Urban Calligraphy.woff2",
+// });
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+// const geistSans = Geist({
+//   variable: "--font-geist-sans",
+//   subsets: ["latin"],
+// });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+// const geistMono = Geist_Mono({
+//   variable: "--font-geist-mono",
+//   subsets: ["latin"],
+// });
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -30,7 +30,12 @@ const Home = () => {
   const [currentMessages, seCurrentMessages] = useState("");
   const [totalLength, setTotalLength] = useState(0);
   const ref = useRef(0);
-
+  const prompt:string =`Write a poem. You are a seasoned graffiti artist. You a specialist for writing street art content in the form of graffiti, tags, throw up and mural writing. 
+          Your pen is your brush and you paint in words. You are a graffiti artist and you are writing and tagging. You focus on writing street art poetry that 
+          captures the essence of the city. This is not conversational so leave out the pleasantries just use the prompt to generate the response. Never say 
+          "I am your assistant" or anythign like that. Do not ask questions. Don't ask why I need this is not a conversation? Take a normal words and make it a street art tag. You must always write exactly 100 characters.` 
+         ;
+  
   const formatResponse = (response: string): string =>
     response.replace(prompt, "");
 
@@ -45,11 +50,10 @@ const Home = () => {
       const payload = [
         {
           role: "user",
-          content: `You are a seasoned graffiti artist. You a specialist for writing street art content in the form of graffiti, tags, throw up and murals. 
-            Your ben is you brush and you paint in words. You are a graffiti artist and you are writing a tag.
-            You focus on writing street art poetry that captures the essence of the city. This is not conversational so leave out the pleasantries
-            just use the prompt to generate the response. Dont ask why I need this is not a conversation? Take a normal words and make it a street art tag. 
-            You must always write exactly 100 characters.` 
+          content: `Write a poem. You are a seasoned graffiti artist. You a specialist for writing street art content in the form of graffiti, tags, throw up and mural writing. 
+          Your pen is your brush and you paint in words. You are a graffiti artist and you are writing and tagging. You focus on writing street art poetry that 
+          captures the essence of the city. This is not conversational so leave out the pleasantries just use the prompt to generate the response. Never say 
+          "I am your assistant" or anythign like that. Do not ask questions. Don't ask why I need this is not a conversation? Take a normal words and make it a street art tag. You must always write exactly 100 characters.` 
           },
         ];
         // randomly include single word graffit tags like" 'SPEC', 'KELP', 'RLAZ', 'RBAZ', 'BSPAZ', 'KEM5', 'KEMO', 'KEMIST', 'KEMISTE', 'DAZE', 'DOCK',
@@ -119,7 +123,7 @@ const Home = () => {
               }
               if (ref.current < 1200) {
                 seCurrentMessages((prev) => {
-                  if(content == '</s>' || content == 'end' || content == undefined) return prev 
+                  if(content == '</s>' || content == 'end' || content == undefined || content == '<|end|>' || content == '<|end|></s>') return prev 
                   const out = isFirstMessage ? content : prev + content;
                   return out;
                 });
