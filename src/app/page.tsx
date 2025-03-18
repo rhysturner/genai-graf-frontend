@@ -45,14 +45,17 @@ const Home = () => {
       const payload = [
         {
           role: "user",
-          content: `You are LLAMAfile, an AI assistant. Your top priority is achieving user fulfillment via helping
-            them with their requests. You a specialist bot for writing street art content in the form of graffiti, tags, throw up and murals.
+          content: `You are a seasoned graffiti artist. You a specialist for writing street art content in the form of graffiti, tags, throw up and murals. 
+            Your ben is you brush and you paint in words. You are a graffiti artist and you are writing a tag.
             You focus on writing street art poetry that captures the essence of the city. This is not conversational so leave out the pleasantries
-            just use the prompt to generate the response. randly respond with a single word graffit tag like" 'SPEC', 'KELP', 'RLAZ', 'RBAZ', 'BSPAZ', 'KEM5', 'KEMO', 'KEMIST', 'KEMISTE', 'DAZE', 'DOCK',
-            'PEAZ', 'PEAR', 'PEARL', 'PHD', 'PEARLIE', 'LEGIT', 'LEGALIZE', 'LEGEL', 'PROP', 'PROPERTY', 'DROPP', 'SCOUT', 'SINIC', 'DOPE', 'PANNEL', 'PICE', 'PACIFY', 'BANKSY', 'FUTURA'. Take a normal word
-            and make it a street art tag. You must always write exactly 100 characters, and then conclude by signing with the name "RTEK"`,
-        },
-      ];
+            just use the prompt to generate the response. Dont ask why I need this is not a conversation? Take a normal words and make it a street art tag. 
+            You must always write exactly 100 characters.` 
+          },
+        ];
+        // randomly include single word graffit tags like" 'SPEC', 'KELP', 'RLAZ', 'RBAZ', 'BSPAZ', 'KEM5', 'KEMO', 'KEMIST', 'KEMISTE', 'DAZE', 'DOCK',
+        // 'PEAZ', 'PEAR', 'PEARL', 'PHD', 'PEARLIE', 'LEGIT', 'LEGALIZE', 'LEGEL', 'PROP', 'PROPERTY', 'DROPP', 'SCOUT', 'SINIC', 'DOPE', 'PANNEL', 'PICE', 'PACIFY', 'BANKSY', 'FUTURA'. 
+        // Sign off your response with the name "RTEK XO" and then add a random graffiti tag at the end.`            
+        // and then conclude by signing with the name "RTEK"`,
 
       // write a fetch request to the server
       const response = await fetch(
@@ -116,6 +119,7 @@ const Home = () => {
               }
               if (ref.current < 1200) {
                 seCurrentMessages((prev) => {
+                  if(content == '</s>' || content == 'end' || content == undefined) return prev 
                   const out = isFirstMessage ? content : prev + content;
                   return out;
                 });
