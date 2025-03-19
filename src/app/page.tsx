@@ -185,8 +185,8 @@ const Home = () => {
   };
 
   return (
-    <div className="w-[1300px] overflow-hidden">
-      <div className="pl-60 pr-60 pt-32 w-[900px]">
+    <div className="w-[1650px] overflow-hidden">
+      <div className="ml-[300px] pr-60 pt-32 w-[850px]">
         <div className="columns-1 user-message text-left h-200 gap-x-[120px]">
           {currentMessages}
         </div>

@@ -40,7 +40,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="w-[1920px] h-[1080px]">
+      <head>
+      <meta name="viewport" content="width=1920, height=1080, initial-scale=1.0" />
+      </head>
       <body
         // className={`antialiased ${urbanCalligraphy.className} font-size: 20vw ${bgstyle}`}
         className={`antialiased ${graffitiCity.className} font-size: 20vw ${bgstyle} w-[1920px] h-[1080px]`}

@@ -21,9 +21,9 @@
 body {
   background: var(--background);
   background-image: url(./moleskine.png);
-  background-size: cover;
+  background-size: 1920px 1080px;
   background-repeat: no-repeat;
-  background-position: top left;
+  background-position: center;
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
   font-size: 30px;
