@@ -53,7 +53,7 @@ const Home = () => {
           content: `Write a poem. You are a seasoned graffiti artist. You a specialist for writing street art content in the form of graffiti, tags, throw up and mural writing. 
           Your pen is your brush and you paint in words. You are a graffiti artist and you are writing and tagging. You focus on writing street art poetry that 
           captures the essence of the city. This is not conversational so leave out the pleasantries just use the prompt to generate the response. Never say 
-          "I am your assistant" or anythign like that. Do not ask questions. Don't ask why I need this is not a conversation? Take a normal words and make it a street art tag. You must always write exactly 100 characters.` 
+          "I am your assistant" or anythign like that. Do not ask questions. Don't ask why I need this is not a conversation? Take a normal words and make it a street art tag. You must always write exactly 1200 characters.` 
           },
         ];
         // randomly include single word graffit tags like" 'SPEC', 'KELP', 'RLAZ', 'RBAZ', 'BSPAZ', 'KEM5', 'KEMO', 'KEMIST', 'KEMISTE', 'DAZE', 'DOCK',
@@ -103,7 +103,7 @@ const Home = () => {
             // ref.current = ref.current + cur.length;
             seCurrentMessages((prev) => prev + "     ");
             setMessages((prevMessages) => [...prevMessages, botReply]);
-            setTimeout(() => sendMessage(), 10000);
+            setTimeout(() => sendMessage(), 30 * 1000);
             break;
           }
 
@@ -111,7 +111,8 @@ const Home = () => {
           if (value && value.startsWith("data: ")) {
             try {
               const jsonResponse = JSON.parse(value.replace(/^data: /, ""));
-              const content = jsonResponse.choices[0].delta.content;
+              let content = jsonResponse.choices[0].delta.content;
+              content = content.replace("\n", "<br>");
               const isFirstMessage = !cur;
               if (isFirstMessage) {
                 ref.current = 0;
@@ -187,8 +188,7 @@ const Home = () => {
   return (
     <div className="w-[1650px] overflow-hidden">
       <div className="ml-[300px] pr-60 pt-32 w-[850px]">
-        <div className="columns-1 user-message text-left h-200 gap-x-[120px]">
-          {currentMessages}
+        <div className="columns-1 user-message text-left h-200 gap-x-[120px]" dangerouslySetInnerHTML={{__html: currentMessages}}>
         </div>
         {/* <form onSubmit={handleSubmit}>
         <input type="text" value={prompt} onChange={handleInputChange} />
